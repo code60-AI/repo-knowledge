@@ -1,9 +1,23 @@
 {
   "name": "repo-knowledge",
-  "version": "0.1.0",
-  "description": "Progressive codebase knowledge base — clone git repos, auto-generate documentation, and build a searchable knowledge cache that grows smarter with every query.",
-  "author": {
-    "name": "liuyuan"
+  "owner": {
+    "name": "code60-AI"
   },
-  "keywords": ["codebase", "knowledge-base", "documentation", "git", "search"]
+  "description": "Progressive codebase knowledge base — clone git repos, auto-generate documentation, and build a searchable knowledge cache that grows smarter with every query.",
+  "version": "0.1.0",
+  "repository": "https://github.com/code60-AI/repo-knowledge",
+  "license": "MIT",
+  "plugins": [
+    {
+      "name": "repo-knowledge",
+      "source": ".",
+      "description": "Progressive codebase knowledge base — clone git repos, auto-generate documentation, and build a searchable knowledge cache that grows smarter with every query.",
+      "version": "0.1.0",
+      "author": {
+        "name": "code60-AI"
+      },
+      "keywords": ["codebase", "knowledge-base", "documentation", "git", "search"],
+      "category": "development"
+    }
+  ]
 }
