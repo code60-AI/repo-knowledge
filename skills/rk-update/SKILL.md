@@ -23,7 +23,14 @@ Check if `{HOME}/.repo-knowledge/_remote.md` exists.
 If it exists: run the full merge flow from `rk-pull` (Steps 3–7) before doing anything else.
 This ensures local knowledge is up to date with all other machines before we add new changes.
 
-## Step 3: Ensure source repo exists
+## Step 3: Check project type
+
+Read `{HOME}/.repo-knowledge/<project-name>/_meta.md`.
+If `type: personal` or `git_url: none` is found:
+- Tell user: "`<project-name>` is a personal knowledge base — use `/repo-knowledge:rk-memo` to add or update entries."
+- Stop here.
+
+## Step 4: Ensure source repo exists
 
 Check if `{HOME}/.repo-knowledge/_repos/<project-name>/` exists.
 

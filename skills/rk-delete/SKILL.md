@@ -20,7 +20,13 @@ Ask: "Are you sure you want to delete the knowledge base for `{project-name}`? T
 rm -rf ~/.repo-knowledge/<project-name>/
 ```
 
-### Step 3: Delete Cloned Repo
+### Step 3: Delete Cloned Repo (skip for personal knowledge bases)
+
+Check `~/.repo-knowledge/<project-name>/_meta.md` before deleting (read it first from Step 2's backup or skip if already deleted).
+
+If `type: personal` or `git_url: none`: skip this step — there is no cloned repo.
+
+Otherwise:
 ```bash
 rm -rf ~/.repo-knowledge/_repos/<project-name>/
 ```
