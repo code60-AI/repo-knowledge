@@ -1,11 +1,7 @@
 {
   "name": "repo-knowledge",
-  "version": "0.3.0",
   "description": "Progressive codebase knowledge base — clone git repos, auto-generate documentation, and build a searchable knowledge cache that grows smarter with every query.",
   "author": {
     "name": "Sixz-AI"
-  },
-  "keywords": ["codebase", "knowledge-base", "documentation", "git", "search"],
-  "skills": "./skills",
-  "agents": ["./agents/indexer.md", "./agents/searcher.md"]
+  }
 }
