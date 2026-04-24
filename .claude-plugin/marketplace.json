@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "repo-knowledge",
-      "source": "./plugins/repo-knowledge",
+      "source": "./",
       "description": "Progressive codebase knowledge base — clone git repos, auto-generate documentation, and build a searchable knowledge cache that grows smarter with every query.",
       "version": "0.3.0",
       "author": {
