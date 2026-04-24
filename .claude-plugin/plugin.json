@@ -5,5 +5,8 @@
   "author": {
     "name": "Sixz-AI"
   },
-  "keywords": ["codebase", "knowledge-base", "documentation", "git", "search"]
+  "keywords": ["codebase", "knowledge-base", "documentation", "git", "search"],
+  "skills": "./skills",
+  "agents": ["./agents/indexer.md", "./agents/searcher.md"],
+  "hooks": "./hooks/hooks.json"
 }
