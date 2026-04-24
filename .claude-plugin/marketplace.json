@@ -9,7 +9,7 @@
       "name": "repo-knowledge",
       "source": "./",
       "description": "Progressive codebase knowledge base — clone git repos, auto-generate documentation, and build a searchable knowledge cache that grows smarter with every query.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "author": {
         "name": "Sixz-AI"
       },
