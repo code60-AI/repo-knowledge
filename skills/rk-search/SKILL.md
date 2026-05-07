@@ -29,9 +29,10 @@ Shallow-scan every knowledge base in parallel to find the best candidates across
 1. Read `~/.repo-knowledge/_registry.md` to get registered projects
 2. Check if `~/.repo-knowledge/_personal/_index.md` exists
 3. Build the scan list:
-   - If `_personal` exists: prepend `_personal` to the project list (scan first, highest priority)
+   - If `_personal` exists AND is not already in the registry: prepend `_personal` to the project list (highest priority)
    - Add all registered projects in registry order
 4. If scan list is empty → tell user: "No knowledge bases found. Use `/repo-knowledge:rk-create <git-url>` to create one, or `/repo-knowledge:rk-memo` to save personal knowledge."
+5. If scan list has exactly 1 entry → skip scoring, go directly to Step 3 with that single project
 
 ### 2.2: Read All Indexes in Parallel
 
@@ -49,7 +50,7 @@ For each entry in each project's index, compute a score:
 
 Scoring rules:
 - A single entry gets the **highest** matching score only (no double-counting)
-- Add a **project priority bonus**: `_personal` entries get +0.5, then registry projects in order get decreasingly smaller bonuses (e.g., first registered +0.3, second +0.2, third +0.1) to break ties
+- Add a **project priority bonus**: `_personal` entries get +0.5; registry projects get +0.3 / position (1st = +0.3, 2nd = +0.15, 3rd = +0.1, etc.) to break ties
 - Only entries with score > 0 are candidates
 
 ### 2.4: Rank and Select
@@ -72,7 +73,7 @@ Mode: breadth-scan verification
 Ranked candidates (try in order, max 3):
 
 {for each candidate, format:}
-- Project: "{project_name}", Doc: "{doc_path}", Score: {score}, Reason: {match_reason}
+- Project: "{project_name}", Doc: "{doc_path}", Score: {score}, Reason: {one of: 'alias exact match', 'alias partial match', 'semantic match'}
 
 Cache base path: "~/.repo-knowledge/"
 
@@ -91,7 +92,9 @@ Cache base path: "~/.repo-knowledge/"
    - If all candidates fail → go to Layer 4
 
 ### Layer 4: Search Source Code (last resort)
-1. Pick the project from the top-ranked candidate (most likely to contain the answer)
+1. Pick the project from the top-ranked candidate that has a `_repos` directory
+   - If the top candidate's project has no `_repos` (e.g., `_personal`), try the next candidate's project
+   - If no candidate has a source repo → inform user and suggest rephrasing the query
 2. Glob: find files in `~/.repo-knowledge/_repos/{project_name}/`
 3. Grep: search with multiple synonym variations (at least 3)
 4. Read: get full context of best matches
@@ -180,6 +183,6 @@ If multiple results are relevant, show top 3.
 
 ## _personal Handling Notes
 - `_personal` is auto-detected by checking `~/.repo-knowledge/_personal/_index.md`
-- It is NOT in `_registry.md` and must NOT be written to the registry
-- When present, it gets the highest priority bonus in scoring
-- When absent, it is simply not included in the scan (no error)
+- If `rk-memo` already added `_personal` to `_registry.md`, it will be found via registry read — no duplicate
+- If `_personal` is NOT in registry, the filesystem check adds it with highest priority
+- When absent from both registry and filesystem, it is simply not included in the scan (no error)
